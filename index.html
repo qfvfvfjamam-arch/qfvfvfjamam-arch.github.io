@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>denycoch</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700&family=Golos+Text:wght@400;500;600&display=swap">
+<style>
+/* Layout: left-aligned hero with a 9:16 clip mock, then a real 4-step pipeline and footer links */
+:root {
+  --bg: #f3f4f6; --paper: #ffffff; --ink: #1b1f27; --muted: #5b6372;
+  --rule: #dfe2e8; --accent: #c2410c; --cam: #2a303b; --game: #b98a4e;
+  --display: "Unbounded", "Segoe UI", system-ui, sans-serif;
+  --body: "Golos Text", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #12151b; --paper: #1a1e26; --ink: #e8eaef; --muted: #9aa2b1;
+  --rule: #2c323d; --accent: #fb923c; --cam: #0d1015; --game: #8a6a3e; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #12151b; --paper: #1a1e26; --ink: #e8eaef; --muted: #9aa2b1;
+  --rule: #2c323d; --accent: #fb923c; --cam: #0d1015; --game: #8a6a3e; color-scheme: dark }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 var(--body); padding: 0 16px; }
+main { max-width: 920px; margin: 0 auto; padding-block: 48px 56px; display: grid; gap: 48px; }
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 40px; align-items: center; }
+.eyebrow { color: var(--accent); font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; margin: 0 0 10px; }
+h1 { font: 700 clamp(40px, 9vw, 72px)/1 var(--display); margin: 0 0 18px; letter-spacing: -.02em; }
+.lead { font-size: 19px; max-width: 34ch; margin: 0 0 22px; color: var(--ink); }
+.facts { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 0; list-style: none; }
+.facts li { border: 1px solid var(--rule); border-radius: 999px; padding: 4px 12px; font-size: 14px; color: var(--muted); background: var(--paper); }
+.phone { width: 180px; aspect-ratio: 9 / 16; max-width: 100%; border-radius: 22px; overflow: hidden;
+  border: 6px solid var(--ink); display: grid; grid-template-rows: 40% 60%; position: relative; }
+.phone .cam { background: radial-gradient(circle at 50% 62%, #d9b89a 0 18%, transparent 19%), var(--cam); }
+.phone .game { background: linear-gradient(180deg, #9cc3de 0 35%, var(--game) 35%); position: relative; }
+.phone .sub { position: absolute; left: 8%; right: 8%; top: 38%; text-align: center; font: 700 12px/1.2 var(--display);
+  color: #ffffff; text-shadow: 0 0 3px #000000, 0 0 3px #000000; }
+.phone .feed { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); width: 18px; height: 18px; border-radius: 50%;
+  background: #f5c542; box-shadow: 0 -18px 0 -6px #f5c542; }
+h2 { font: 600 22px/1.3 var(--display); margin: 0 0 18px; }
+.steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; counter-reset: s; padding: 0; margin: 0; list-style: none; }
+.steps li { background: var(--paper); border: 1px solid var(--rule); border-radius: 12px; padding: 16px; min-width: 0; }
+.steps li::before { counter-increment: s; content: counter(s); display: block; color: var(--accent);
+  font: 700 22px var(--display); font-variant-numeric: tabular-nums; margin-bottom: 6px; }
+.steps b { display: block; margin-bottom: 4px; }
+.steps p { margin: 0; color: var(--muted); font-size: 15px; }
+.note { color: var(--muted); max-width: 65ch; margin: 14px 0 0; }
+footer { border-top: 1px solid var(--rule); padding-top: 18px; display: flex; flex-wrap: wrap; gap: 8px 24px; color: var(--muted); font-size: 14px; }
+a { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (max-width: 720px) {
+  .hero { grid-template-columns: 1fr; }
+  .phone { width: 150px; }
+  .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 420px) { .steps { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<main>
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Desktop app · Windows</p>
+      <h1>denycoch</h1>
+      <p class="lead">Turns long Counter-Strike 2 stream recordings into vertical highlight clips and posts the ones you pick to your own TikTok.</p>
+      <ul class="facts">
+        <li>1080 × 1920 clips</li>
+        <li>Kill and speech detection</li>
+        <li>Runs on your PC</li>
+        <li>No accounts, no tracking</li>
+      </ul>
+    </div>
+    <div class="phone" aria-label="Example clip layout: webcam on top, gameplay below, subtitles in the middle">
+      <div class="cam"></div>
+      <div class="game"><div class="feed"></div></div>
+      <div class="sub">HE'S RIGHT THERE!</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>How it works</h2>
+    <ol class="steps">
+      <li><b>Open a recording</b><p>Any MP4 of your CS2 stream with the webcam in a corner.</p></li>
+      <li><b>Find the moments</b><p>Kills are read from the in-game HUD, speech from the audio with timestamps.</p></li>
+      <li><b>Review the clips</b><p>Close events are merged into one scene. You tick the clips to keep.</p></li>
+      <li><b>Export and post</b><p>Webcam on top, gameplay below, subtitles on. Posting to TikTok happens only when you choose.</p></li>
+    </ol>
+    <p class="note">denycoch is a personal tool. It connects to TikTok through the official Login Kit and Content Posting API and uploads only to the account you connect. It is not made or endorsed by TikTok.</p>
+  </section>
+
+  <footer>
+    <a href="terms.html">Terms of Service</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <span>Contact: Telegram channel <strong>denyCS2</strong></span>
+  </footer>
+</main>
+</body>
+</html>
